@@ -47,10 +47,30 @@ function calculate(myLongitude, myLatitude, long1, lat1) {
   }
 };
 
+function isFree(networks) {
+  return networks[10] !== "Limited Free"
+}
+
+class Hotspot {
+  constructor(objectId, ssid, location, city, boro, location_type, latitude, longitude, name, provider) {
+    this.objectId = objectId
+    this.ssid = ssid
+    this.location = location
+    this.city = city
+    this.boro = boro
+    this.location_type = location_type
+    this.latitude = latitude
+    this.longitude = longitude
+    this.name = name
+    this.provider = provider
+  }
+}
+
 function showHotspots(event, data) {
   var hotspots = JSON.parse(this.responseText)
-  console.log(hotspots)
-  const hotspotList = `<ul>${hotspots.data.map(h => '<li>' + `${h[9]}, ${h[10]}, ${h[11]}, ${h[12]}, ${h[13]}` + '</li>').join('')}</ul>`
+  var freeHotspots = hotspots.data.filter(isFree)
+  console.log(freeHotspots)
+  const hotspotList = `<ul>${freeHotspots.map(h => '<li>' + `${h[9]}, ${h[10]}, ${h[11]}, ${h[12]}, ${h[13]}` + '</li>').join('')}</ul>`
   document.getElementById("hotspots").innerHTML = hotspotList
 }
 
@@ -59,13 +79,4 @@ function getHotspots() {
   req.addEventListener("load", showHotspots);
   req.open("GET", 'https://data.cityofnewyork.us/api/views/yjub-udmw/rows.json')
   req.send()
-}
-
-class Hotspot {
-  constructor(name, description, instructions, source){
-    this.name = name
-    this.description = description
-    this.instructions = instructions
-    this.source = source
-  }
 }
