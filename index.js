@@ -86,17 +86,15 @@ function showHotspots(event, data) {
   console.log(modelHotspots)
   const hotspotList = `<ul>
     ${modelHotspots.map(h =>
-      '<li>' + h.objectId + ', '
-      + h.ssid + ', '
-      + h.location + ', '
-      + h.city + ', '
-      + h.boro + ', '
-      + h.locationType + ', '
+      '<li>' + '<div> Object ID: ' + h.objectId + '</div>'
+      + '<div> SSID: ' + h.ssid + '</div>'
+      + '<div> Location/Address: ' + h.location + ', ' + h.city + '</div>'
+      + '<div> Location Type: ' + h.locationType + '</div>'
+      + '<div> Name: ' + h.name + '</div>'
+      + '<div> Provider: ' + h.provider + '</div>'
       + h.latitude + ', '
-      + h.longitude + ', '
-      + h.name + ', '
-      + h.provider
-      + '</li>').join('')}
+      + h.longitude
+      + '</li><br>').join('')}
     </ul>`
   document.getElementById("hotspots").innerHTML = hotspotList
 }
