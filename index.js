@@ -1,6 +1,6 @@
 var x = document.getElementById("demo");
-var myLatitude = position.coords.latitude
-var myLongitude = position.coords.longitude
+var myLatitude
+var myLongitude
 
 function getLocation() {
   if (navigator.geolocation) {
