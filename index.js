@@ -52,13 +52,13 @@ function isFree(networks) {
 }
 
 class Hotspot {
-  constructor(objectId, ssid, location, city, boro, location_type, latitude, longitude, name, provider) {
+  constructor(objectId, ssid, location, city, boro, locationType, latitude, longitude, name, provider) {
     this.objectId = objectId
     this.ssid = ssid
     this.location = location
     this.city = city
     this.boro = boro
-    this.location_type = location_type
+    this.locationType = locationType
     this.latitude = latitude
     this.longitude = longitude
     this.name = name
@@ -68,9 +68,36 @@ class Hotspot {
 
 function showHotspots(event, data) {
   var hotspots = JSON.parse(this.responseText)
-  var freeHotspots = hotspots.data.filter(isFree)
-  console.log(freeHotspots)
-  const hotspotList = `<ul>${freeHotspots.map(h => '<li>' + `${h[9]}, ${h[10]}, ${h[11]}, ${h[12]}, ${h[13]}` + '</li>').join('')}</ul>`
+  const freeHotspots = hotspots.data.filter(isFree)
+  const modelHotspots = freeHotspots.map((hotspot) => {
+    return new Hotspot(
+      hotspot[8],
+      hotspot[21],
+      hotspot[13],
+      hotspot[20],
+      hotspot[9],
+      hotspot[18],
+      hotspot[14],
+      hotspot[15],
+      hotspot[12],
+      hotspot[11]
+    )
+  })
+  console.log(modelHotspots)
+  const hotspotList = `<ul>
+    ${modelHotspots.map(h =>
+      '<li>' + h.objectId + ', '
+      + h.ssid + ', '
+      + h.location + ', '
+      + h.city + ', '
+      + h.boro + ', '
+      + h.locationType + ', '
+      + h.latitude + ', '
+      + h.longitude + ', '
+      + h.name + ', '
+      + h.provider
+      + '</li>').join('')}
+    </ul>`
   document.getElementById("hotspots").innerHTML = hotspotList
 }
 
