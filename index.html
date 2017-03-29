@@ -6,17 +6,21 @@
   </head>
   <body>
     <main>
-      <p>Click the button to get your coordinates.</p>
-        <button onclick="getLocation()">Try It</button>
-      <p id="demo"></p>
-      <div>
-        <h3>Hotspots</h3>
-        <a href="#" onclick="getHotspots()">Get Hotspots</a>
-        <div id="hotspots"></div>
+      <p>Click the button to find the nearest free public WiFi hotspots!</p>
+      <div class="test">
+        <button class="button">FIND DEM INTERNETS!</button>
+        <br><br><br><br>
       </div>
+      <ul id="hotspots"></ul>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="index.js"></script>
+    <script src="/js/wrappers/api.js"></script>
+    <script src="/js/models/hotspot.js"></script>
+    <script src="/js/controllers/hotspotListController.js" charset="utf-8"></script>
+    <script src="/js/controllers/hotspotShowController.js" charset="utf-8"></script>
+    <script src="/js/views/hotspotView.js" charset="utf-8"></script>
+    <script src="/js/app.js"></script>
+    <!-- <script src="index.js"></script> -->
   </body>
 </html>
