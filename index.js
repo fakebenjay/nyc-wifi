@@ -1,4 +1,4 @@
-var x = document.getElementById("demo");
+var x = $("#demo");
 var myLatitude
 var myLongitude
 
@@ -6,13 +6,13 @@ function getLocation() {
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
   } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
+      x.html("Geolocation is not supported by this browser.");
   }
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + myLatitude +
-  "<br>Longitude: " + myLongitude;
+  x.html(`Latitude: ${myLatitude}<br>
+    Longitude: ${myLongitude}`);
 
   myLatitude = position.coords.latitude
   myLongitude = position.coords.longitude
@@ -96,7 +96,7 @@ function showHotspots(event, data) {
       + h.longitude
       + '</li><br>').join('')}
     </ul>`
-  document.getElementById("hotspots").innerHTML = hotspotList
+  $("#hotspots").html(hotspotList)
 }
 
 function getHotspots() {
