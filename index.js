@@ -4,9 +4,9 @@ var myLongitude
 
 function getLocation() {
   if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition(showPosition);
   } else {
-      x.html("Geolocation is not supported by this browser.");
+    x.html("Geolocation is not supported by this browser.");
   }
 }
 
@@ -21,16 +21,17 @@ function showPosition(position) {
   console.log(myLongitude)
 }
 
-function calculate(myLongitude, myLatitude, long1, lat1) {
+function calculate(hotspot) {
   earthRadius = 6371;
 
-  myLongitude = myLongitude * (Math.PI / 180);
-  myLatitude = myLatitude * (Math.PI / 180);
-  long1 = long1 * (Math.PI / 180);
-  lat1 = lat1 * (Math.PI / 180);
+  myLongitudeRads = myLongitude * (Math.PI / 180);
+  myLatitudeRads = myLatitude * (Math.PI / 180);
 
-  x0 = myLongitude * earthRadius * Math.cos(myLatitude);
-  y0 = myLatitude * earthRadius;
+  long1 = hotspot.longitude * (Math.PI / 180);
+  lat1 = hotspot.latitude * (Math.PI / 180);
+
+  x0 = myLongitudeRads * earthRadius * Math.cos(myLatitudeRads);
+  y0 = myLatitudeRads * earthRadius;
 
   x1 = long1 * earthRadius * Math.cos(lat1);
   y1 = lat1 * earthRadius;
@@ -40,11 +41,7 @@ function calculate(myLongitude, myLatitude, long1, lat1) {
 
   d = Math.sqrt((dx * dx) + (dy * dy));
 
-  if (d < 1) {
-    return Math.round(d * 1000) +" m";
-  } else {
-    return Math.round(d * 10) / 10 +" km";
-  }
+  return d <= 1
 };
 
 function isFree(networks) {
@@ -59,8 +56,8 @@ class Hotspot {
     this.city = city
     this.boro = boro
     this.locationType = locationType
-    this.latitude = latitude
-    this.longitude = longitude
+    this.latitude = parseFloat(latitude)
+    this.longitude = parseFloat(longitude)
     this.name = name
     this.provider = provider
   }
@@ -83,9 +80,10 @@ function showHotspots(event, data) {
       hotspot[11]
     )
   })
-  console.log(modelHotspots)
+  const nearbyHotspots = modelHotspots.filter(calculate)
+  console.log(nearbyHotspots)
   const hotspotList = `<ul>
-    ${modelHotspots.map(h =>
+    ${nearbyHotspots.map(h =>
       '<li>' + '<div> Object ID: ' + h.objectId + '</div>'
       + '<div> SSID: ' + h.ssid + '</div>'
       + '<div> Location/Address: ' + h.location + ', ' + h.city + '</div>'
