@@ -13,9 +13,9 @@ class Hotspot {
   }
 
   static all() {
-    return NYCApi.getJSON("views/yjub-udmw/rows.json").
-    then(this.filterOutTimeWarner).
-    then((data) => {
+    return NYCApi.getJSON("views/yjub-udmw/rows.json")
+    .then(this.filterOutTimeWarner)
+    .then((data) => {
       return data.map(this.newFromApi)
     })
   }
@@ -24,7 +24,7 @@ class Hotspot {
     return hotspots.filter((h) => h[10] !== "Limited Free")
   }
 
-  static newFromApi(hotspot){
+  static newFromApi(hotspot) {
     return new Hotspot(
       hotspot[8],
       hotspot[21],
@@ -37,5 +37,28 @@ class Hotspot {
       hotspot[12],
       hotspot[11]
     )
+  }
+
+  static distance(hotspot) {
+    const earthRadius = 6371;
+
+    var myLongitudeRads = myLongitude * (Math.PI / 180);
+    var myLatitudeRads = myLatitude * (Math.PI / 180);
+
+    var long1 = hotspot.longitude * (Math.PI / 180);
+    var lat1 = hotspot.latitude * (Math.PI / 180);
+
+    var x0 = myLongitudeRads * earthRadius * Math.cos(myLatitudeRads);
+    var y0 = myLatitudeRads * earthRadius;
+
+    var x1 = long1 * earthRadius * Math.cos(lat1);
+    var y1 = lat1 * earthRadius;
+
+    var dx = x0 - x1;
+    var dy = y0 - y1;
+
+    var d = Math.sqrt((dx * dx) + (dy * dy));
+
+    return d <= 1
   }
 }

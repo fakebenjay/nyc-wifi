@@ -1,4 +1,8 @@
 $(() => {
+  attachListeners();
+  })
+
+function apiCall() {
   Hotspot.all()
   .then((hotspots) => {
     let $target = $("main")
@@ -6,4 +10,11 @@ $(() => {
     let detailController = new HotspotShowController($detailTarget)
     let listController = new HotspotListController($target, hotspots, detailController)
   })
-})
+}
+
+function attachListeners() {
+  $("div.test").on('click', 'button.button', (e) => {
+    e.preventDefault()
+    apiCall()
+  })
+}
