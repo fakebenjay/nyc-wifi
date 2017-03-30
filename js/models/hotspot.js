@@ -13,7 +13,7 @@ class Hotspot {
   }
 
   static all() {
-    return NYCApi.getJSON("views/yjub-udmw/rows.json")
+    return HotspotApi.getJSON("views/yjub-udmw/rows.json")
     .then(this.filterOutTimeWarner)
     .then((data) => {
       return data.map(this.newFromApi)
