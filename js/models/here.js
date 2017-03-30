@@ -5,15 +5,17 @@ class Here {
   }
 
   static whereAmI() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        return new Here(
-          position.coords.latitude,
-          position.coords.longitude
-        )
-      });
-    } else {
-      $("div.test").html("Geolocation is not supported by this browser.");
-    }
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          resolve(new Here (
+            position.coords.latitude,
+            position.coords.longitude
+          ))
+        });
+      } else {
+        reject("Geolocation is not supported by this browser.")
+      }
+    })
   }
 }

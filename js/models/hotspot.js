@@ -21,14 +21,15 @@ class Hotspot {
   }
 
   static localized() {
-    // var currentLocation = Here.whereAmI()
-    // var myLatitude = currentLocation.latitude
-    // var myLongitude = currentLocation.longitude
+    let locationPromise = Here.whereAmI()
 
-    return Hotspot.all()
-    // .then((data) => {
-    //   return data.map(this.distance)
-    // })
+    let hotspotPromise = Hotspot.all()
+    return Promise.all([locationPromise, hotspotPromise])
+    .then(([locationResult,data]) => {
+      return data.filter((data) => {
+        return this.distance(data, locationResult)
+      })
+    })
   }
 
   static filterOutTimeWarner(hotspots) {
@@ -50,11 +51,11 @@ class Hotspot {
     )
   }
 
-  static distance(hotspot) {
+  static distance(hotspot, locationResult) {
     const earthRadius = 6371;
 
-    var myLongitudeRads = myLongitude * (Math.PI / 180);
-    var myLatitudeRads = myLatitude * (Math.PI / 180);
+    var myLongitudeRads = locationResult.longitude * (Math.PI / 180);
+    var myLatitudeRads = locationResult.latitude * (Math.PI / 180);
 
     var long1 = hotspot.longitude * (Math.PI / 180);
     var lat1 = hotspot.latitude * (Math.PI / 180);
