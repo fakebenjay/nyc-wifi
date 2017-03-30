@@ -6,12 +6,13 @@ class Here {
 
   static whereAmI() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(() =. {
-        this.latitude = position.coords.latitude
-        this.longitude = position.coords.longitude
+      navigator.geolocation.getCurrentPosition((position) => {
+        return new Here(
+          position.coords.latitude,
+          position.coords.longitude
+        )
       });
-    }
-    else {
+    } else {
       $("div.test").html("Geolocation is not supported by this browser.");
     }
   }

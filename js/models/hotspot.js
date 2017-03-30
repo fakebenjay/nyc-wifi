@@ -20,6 +20,17 @@ class Hotspot {
     })
   }
 
+  static localized() {
+    // var currentLocation = Here.whereAmI()
+    // var myLatitude = currentLocation.latitude
+    // var myLongitude = currentLocation.longitude
+
+    return Hotspot.all()
+    // .then((data) => {
+    //   return data.map(this.distance)
+    // })
+  }
+
   static filterOutTimeWarner(hotspots) {
     return hotspots.filter((h) => h[10] !== "Limited Free")
   }
