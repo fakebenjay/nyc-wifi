@@ -25,11 +25,15 @@ class Hotspot {
 
     let hotspotPromise = Hotspot.all()
     return Promise.all([locationPromise, hotspotPromise])
-    .then(([locationResult,data]) => {
+    .then(([locationResult, data]) => {
       return data.filter((data) => {
         return this.distance(data, locationResult)
       })
     })
+  }
+
+  static mapped() {
+    return Hotspot.localized()
   }
 
   static filterOutTimeWarner(hotspots) {
