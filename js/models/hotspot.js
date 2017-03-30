@@ -23,7 +23,7 @@ class Hotspot {
   static localized() {
     let locationPromise = Here.whereAmI()
     let hotspotPromise = Hotspot.all()
-    
+
     return Promise.all([locationPromise, hotspotPromise])
     .then(([locationResult, data]) => {
       return data.filter((data) => {
@@ -33,7 +33,16 @@ class Hotspot {
   }
 
   static mapped() {
-    return Hotspot.localized()
+    let locationPromise = Here.whereAmI()
+    let nearbyHotspots = hotspot.localized()
+    let map = Map.initMap(googleMapsApiKey)
+
+    return Promise.all([locationPromise, nearbyHotspots, map])
+    .then(([locationResult, data]) => {
+      return data.filter((data) => {
+        return this.distance(data, locationResult)
+      })
+    })
   }
 
   static filterOutTimeWarner(hotspots) {

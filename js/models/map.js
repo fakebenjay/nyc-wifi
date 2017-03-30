@@ -1,20 +1,40 @@
 class Map {
-  constructor(myLatitude, myLongitude, myLocation, hotspots) {
-    this.myLatitude = myLatitude
-    this.myLongitude = myLongitude
-    this.myLocation = { lat: myLatitude, lng: myLongitude }
+  constructor(myLocation, hotspots, atlas) {
+    this.myLatitude = this.myLocation.latitude
+    this.myLongitude = this.myLocation.longitude
+    this.myLocation = myLocation
     this.hotspots = hotspots
+    this.atlas = atlas
   }
 
-  static initMap() {
-    var whereImAt = this.myLocation;
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: whereImAt
-    });
-    var marker = new google.maps.Marker({
-      position: whereImAt,
-      map: map
-    });
+  static initMap(googleMapsApiKey) {
+    return new Map(
+      Here.whereAmI(),
+      Hotspot.localized(),
+      mapApi.get(googleMapsApiKey)
+    )
+    .then(
+      var whereImAt = this.location;
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 11,
+        center: whereImAt
+      });
+
+      var yourPlaceDescription = "<h1>THIS IS WHERE YOU AT</h1>"
+
+      var infowindow = new google.maps.InfoWindow({
+        content: yourPlaceDescription
+      });
+
+      var marker = new google.maps.Marker({
+        position: whereImAt,
+        map: map
+      });
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+
+      return map
+    )
   }
 }

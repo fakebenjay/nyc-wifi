@@ -1,8 +1,5 @@
 class MapApi {
-  static getJSON(resource){
-    return $.getJSON(`https://api.mapbox.com/${resource}`)
-    .then((resp) => {
-      return resp.data
-    })
+  static get(key){
+    return $.get(`https://maps.googleapis.com/maps/api/js?key=${key}`)
   }
 }

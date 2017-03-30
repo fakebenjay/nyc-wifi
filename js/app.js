@@ -3,7 +3,7 @@ $(() => {
   })
 
 function apiCall() {
-  Hotspot.mapped()
+  Hotspot.localized()
   .then((hotspots) => {
     let $target = $("main")
     let $detailTarget = $("div.test")

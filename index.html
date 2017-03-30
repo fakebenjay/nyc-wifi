@@ -12,11 +12,13 @@
           zoom: 11,
           center: whereImAt
         });
+
         var yourPlaceDescription = "<h1>THIS IS WHERE YOU AT</h1>"
 
         var infowindow = new google.maps.InfoWindow({
           content: yourPlaceDescription
         });
+
 
         var marker = new google.maps.Marker({
           position: whereImAt,
@@ -27,9 +29,9 @@
         });
       }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=MYKEYISHIDDENYOULOSERS&callback=initMap"></script>
-    <script src="/js/wrappers/mapapi.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUCANTHANDLEMYKEY&callback=initMap"></script>
     <script src="/js/wrappers/hotspotapi.js"></script>
+    <script src="/js/wrappers/mapapi.js"></script>
     <script src="/js/models/hotspot.js"></script>
     <script src="/js/models/map.js"></script>
     <script src="/js/models/here.js"></script>
