@@ -6,7 +6,7 @@ class HotspotListController {
     this.render()
   }
 
-  render(){
+  render() {
     HotspotView.renderListItems(this.$target.find("ul#hotspots"), this.hotspots)
   }
 }

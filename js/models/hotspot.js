@@ -22,8 +22,8 @@ class Hotspot {
 
   static localized() {
     let locationPromise = Here.whereAmI()
-
     let hotspotPromise = Hotspot.all()
+    
     return Promise.all([locationPromise, hotspotPromise])
     .then(([locationResult, data]) => {
       return data.filter((data) => {

@@ -1,3 +1,6 @@
+main {
+    text-align: center;
+}
 
 button.button {
     background-color: blue;
@@ -9,3 +12,8 @@ button.button {
     display: inline-block;
     font-size: 16px;
 }
+
+#map {
+  height: 500px;
+  width: 75%;
+ }
