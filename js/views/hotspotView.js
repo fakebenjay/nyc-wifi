@@ -1,10 +1,14 @@
 class HotspotView {
-  static renderListItems($detailTarget, hotspots) {
+  static renderListItems($target, hotspots) {
     let listItems = hotspots.map(this.listItemTemplate)
-    $detailTarget.html(listItems)
+    let location = Here.whereAmI()
+    console.log(location)
+    console.log(listItems)
+    $target.html(listItems)
+    // $target.html('<div id="mapHolder"></div>')
   }
 
-  static listItemTemplate(hotspot){
+  static listItemTemplate(hotspot) {
     return `<li id="hotspot-details"><div> Object ID: ${hotspot.objectId}</div>
     <div> SSID: ${hotspot.ssid}</div>
     <div> Location/Address: ${hotspot.location}, ${hotspot.city}</div>

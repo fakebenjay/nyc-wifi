@@ -3,40 +3,16 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <script src="application.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>
-      function initMap() {
-        var whereImAt = {lat: 40.705751, lng: -73.989610};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 11,
-          center: whereImAt
-        });
-
-        var yourPlaceDescription = "<h1>THIS IS WHERE YOU AT</h1>"
-
-        var infowindow = new google.maps.InfoWindow({
-          content: yourPlaceDescription
-        });
-
-
-        var marker = new google.maps.Marker({
-          position: whereImAt,
-          map: map
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-      }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=PLACEDATKEYIN&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=KEYISHIDDENHAHAHAHAHAHA"></script>
     <script src="/js/wrappers/hotspotapi.js"></script>
-    <script src="/js/wrappers/mapapi.js"></script>
     <script src="/js/models/hotspot.js"></script>
     <script src="/js/models/map.js"></script>
     <script src="/js/models/here.js"></script>
-    <script src="/js/controllers/hotspotListController.js" charset="utf-8"></script>
-    <script src="/js/controllers/hotspotShowController.js" charset="utf-8"></script>
+    <script src="/js/controllers/searchController.js" charset="utf-8"></script>
+    <script src="/js/controllers/mapController.js" charset="utf-8"></script>
+    <script src="/js/controllers/hotspotResultsController.js" charset="utf-8"></script>
+    <script src="/js/views/mapView.js" charset="utf-8"></script>
     <script src="/js/views/hotspotView.js" charset="utf-8"></script>
     <script src="/js/app.js"></script>
     <!-- <script src="index.js"></script> -->
@@ -46,10 +22,10 @@
     <main>
       <img src="wifinyc.png" alt="">
       <h2>For New Yorkers who are too cheap to buy coffee</h2>
-      <div class="loadscreen"></div>
+      <div class="hotspot-list"></div>
+      <div class="hotspot-map"></div>
       <div class="test">
         <button class="button">FIND DEM INTERNETS!</button>
-        <div id="map"></div>
         <ul id="hotspots"></ul>
       </div>
     </main>

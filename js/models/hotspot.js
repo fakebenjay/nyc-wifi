@@ -26,19 +26,8 @@ class Hotspot {
 
     return Promise.all([locationPromise, hotspotPromise])
     .then(([locationResult, data]) => {
-      return data.filter((data) => {
-        return this.distance(data, locationResult)
-      })
-    })
-  }
-
-  static mapped() {
-    let locationPromise = Here.whereAmI()
-    let nearbyHotspots = hotspot.localized()
-    let map = Map.initMap(googleMapsApiKey)
-
-    return Promise.all([locationPromise, nearbyHotspots, map])
-    .then(([locationResult, data]) => {
+      console.log(locationResult)
+      console.log(data)
       return data.filter((data) => {
         return this.distance(data, locationResult)
       })
